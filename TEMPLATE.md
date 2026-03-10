@@ -4,6 +4,70 @@ Use the following blueprint for a generated notebook-first learning lab.
 
 ---
 
+# `notes.md` Blueprint
+
+Use the same structure in both modes.
+Fast exploration stays short.
+In-depth exploration expands the depth inside the same sections.
+
+## Required sections
+
+### 1. Title and mode
+
+Use:
+
+- `# <Library> Notes`
+- `**Mode:** <fast exploration|in-depth exploration>`
+
+### 2. `## What This Library Is For`
+
+Explain the problem the library solves in plain language.
+
+### 3. `## Why It Exists`
+
+Explain why someone would reach for it instead of a simpler default.
+
+### 4. `## Mental Model`
+
+Describe the beginner model that makes the rest of the lab easier to follow.
+
+### 5. `## Core Concepts To Understand First`
+
+List the most important concepts a beginner should understand early.
+
+### 6. `## Minimal Setup / Install Notes`
+
+Keep setup short and practical.
+Use `uv` by default.
+
+### 7. `## What To Ignore For Now`
+
+Call out advanced areas that are real but not needed for the first pass.
+
+### 8. `## Notebook Plan / Learning Flow`
+
+Describe the teaching path the notebook should follow.
+
+### 9. `## Support-File Strategy`
+
+Explain whether `mini_project/`, `data/`, or `assets/` are needed and why.
+
+### 10. `## What The Learner Should Understand By The End`
+
+State the concrete outcomes for the first pass.
+
+### 11. `## Project Ideas`
+
+Include one strong project idea in fast mode and add more only when in-depth mode clearly benefits from them.
+
+### 12. `## Sources`
+
+List the main sources used.
+Group or label official sources clearly.
+Keep this section short and practical.
+
+---
+
 # `learning_lab.ipynb` Blueprint
 
 ## Required sections
@@ -72,6 +136,28 @@ Give 2-4 small follow-up changes the learner can try next.
 
 List concrete follow-up prompts that deepen understanding without exploding scope.
 
+### 14. Markdown cell — Sources and next reading
+
+Include:
+
+- the main official docs used
+- any official repository docs or examples used
+- a short pointer on where the learner should go next
+
+Keep this short.
+Do not add citation clutter throughout the notebook.
+
+---
+
+## Support-file reads
+
+If the notebook reads local support files:
+
+- add one small helper cell to resolve files from likely working directories
+- reuse that helper for each support file read
+- raise a learner-friendly `FileNotFoundError` when a file is missing
+- include the missing path, candidate paths checked, and a short recovery hint
+
 ---
 
 ## Mode guidance
@@ -115,3 +201,4 @@ Avoid:
 - disconnected snippets
 - raw documentation pasted into cells
 - advanced setup before the learner has a reason to care
+- undocumented claims when a source can be shown instead

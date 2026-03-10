@@ -74,6 +74,21 @@ The notebook should still work as a guided read-through even if the learner does
 
 ---
 
+## Trustworthy learning
+
+The notebook and `notes.md` should make the main sources visible.
+
+Prefer:
+
+- official documentation
+- official repository docs and examples
+- other first-party sources only when they clearly support the official docs
+
+Avoid undocumented claims when practical.
+Keep provenance lightweight: one short source section is enough.
+
+---
+
 ## Project-based exposure
 
 Every exploration should point toward at least one practical project idea.
@@ -112,4 +127,5 @@ The learner opens the notebook and quickly understands:
 - how its core model works
 - what the important code looks like
 - what to ignore for now
+- where to read next in the official sources
 - what to build or try next

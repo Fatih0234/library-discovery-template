@@ -58,7 +58,25 @@ Prefer:
 - first-party examples
 - high-quality tutorial material only when it clearly supports the official docs
 
+Avoid unsupported or undocumented claims when practical.
+
 Then reduce that material into `examples/<library>/notes.md` before generating the notebook.
+Use the standard `notes.md` structure:
+
+1. library name and mode
+2. what the library is for
+3. why it exists
+4. mental model
+5. core concepts to understand first
+6. minimal setup / install notes
+7. what to ignore for now
+8. notebook plan / learning flow
+9. support-file strategy
+10. what the learner should understand by the end
+11. project ideas
+12. sources
+
+Record the main sources used and label official sources clearly.
 
 ---
 
@@ -78,7 +96,10 @@ The notebook should show:
 - a few annotated code cells
 - what to ignore for now
 - one strong project idea
+- a short `Sources and next reading` section
 - next experiments and follow-up questions
+
+If the notebook reads local support files, use one small readable path helper and raise a learner-friendly error when a file is missing.
 
 ---
 
@@ -104,6 +125,13 @@ Ask:
 - Is this still small?
 - Does the example feel useful?
 - Is the Python library usage easy to understand?
+- Does the notebook teach progressively?
+- Does it include a clear mental model and runnable example?
+- Does it avoid becoming a docs dump?
+- Does `notes.md` follow the standard structure?
+- Are sources recorded clearly?
+- Does the output fit the selected mode?
+- Are support files minimal and justified?
 
 ---
 

@@ -20,11 +20,29 @@ The V1 workflow is file-based:
 1. choose a Python library
 2. optionally ask up to 3 short framing questions
 3. research official docs and first-party examples
-4. save curated research in `examples/<library>/notes.md`
+4. save curated structured research in `examples/<library>/notes.md`
 5. generate `examples/<library>/learning_lab.ipynb`
 6. optionally add `examples/<library>/mini_project/` only when it materially helps the notebook
 
 The primary deliverable is `learning_lab.ipynb`.
+
+---
+
+## Source provenance contract
+
+Source provenance is part of the output contract.
+
+Every exploration should:
+
+- prioritize official documentation first
+- then use official repository docs and examples
+- use other high-quality first-party sources only when they clearly support the official docs
+- avoid unsupported or undocumented claims when practical
+- include a short `Sources` section in `notes.md`
+- include a short `Sources` or `Sources and next reading` section in the notebook
+
+Keep provenance lightweight.
+A small explicit source section is enough.
 
 ---
 
@@ -87,6 +105,34 @@ This should still feel like a guided lab, not a docs dump.
 
 ---
 
+## `notes.md` contract
+
+Every exploration should create `examples/<library>/notes.md` with this standard shape:
+
+1. `# <Library> Notes`
+2. `**Mode:** <fast exploration|in-depth exploration>`
+3. `## What This Library Is For`
+4. `## Why It Exists`
+5. `## Mental Model`
+6. `## Core Concepts To Understand First`
+7. `## Minimal Setup / Install Notes`
+8. `## What To Ignore For Now`
+9. `## Notebook Plan / Learning Flow`
+10. `## Support-File Strategy`
+11. `## What The Learner Should Understand By The End`
+12. `## Project Ideas`
+13. `## Sources`
+
+Rules:
+
+- keep the same skeleton in both modes
+- keep fast exploration short and selective
+- expand depth inside the same sections for in-depth exploration
+- justify any `mini_project/`, `data/`, or `assets/` in `Support-File Strategy`
+- keep the `Sources` section short and practical
+
+---
+
 ## Notebook contract
 
 Every notebook should be organized around a guided learning flow.
@@ -106,6 +152,7 @@ Typical sections:
 11. one main project or several project ideas
 12. exercises or next experiments
 13. suggested next questions for the agent
+14. sources and next reading
 
 The notebook should intentionally mix:
 
@@ -113,6 +160,12 @@ The notebook should intentionally mix:
 - code cells for runnable examples
 - mini experiments
 - small helper snippets only when necessary
+
+If the notebook reads support files from disk, use one small helper cell to resolve paths from likely working directories and raise a learner-friendly `FileNotFoundError` that:
+
+- names the missing file
+- shows the candidate paths checked
+- explains how to run the notebook or where the file should exist
 
 The notebook should still be useful even if the learner mostly reads it before running every cell.
 
@@ -150,6 +203,7 @@ The system should optimize for:
 - progressive understanding
 - practical code
 - small project scope
+- explicit provenance
 - minimal setup friction
 
 Use `uv` as the default tool for Python environments and package management.

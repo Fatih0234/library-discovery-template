@@ -1,16 +1,12 @@
-# Airflow Notes for Notebook-First Learning Lab
+# Airflow Notes
 
-This file is not meant to be full documentation.
-It is a curated source file for generating a beginner-friendly notebook.
+**Mode:** fast exploration
 
----
-
-## What Airflow is for
+## What This Library Is For
 
 Airflow is used to define, schedule, and observe workflows.
 
-A workflow in Airflow is usually modeled as a DAG:
-Directed Acyclic Graph.
+A workflow in Airflow is usually modeled as a DAG: a Directed Acyclic Graph.
 
 In practice, this means you describe:
 
@@ -20,9 +16,7 @@ In practice, this means you describe:
 
 Airflow is common in data engineering and automation work where repeatable multi-step processes matter.
 
----
-
-## Why it exists
+## Why It Exists
 
 People reach for Airflow when a plain Python script or cron job stops being enough.
 
@@ -37,9 +31,7 @@ The value is:
 A beginner does not need the production story first.
 They need to see how Airflow turns a multi-step process into a readable workflow.
 
----
-
-## Beginner mental model
+## Mental Model
 
 The first useful mental model is:
 
@@ -50,9 +42,7 @@ The first useful mental model is:
 
 For first exposure, keep the workflow tiny and local.
 
----
-
-## Core concepts to emphasize
+## Core Concepts To Understand First
 
 ### 1. DAG
 
@@ -83,9 +73,15 @@ A beginner only needs a minimal idea of scheduling at first.
 Airflow keeps logs and task states visible.
 This is part of why it exists.
 
----
+## Minimal Setup / Install Notes
 
-## What to ignore for now
+Use `uv` by default for environment creation and installation.
+
+Airflow installation is version-sensitive, so the notebook should show the `uv pip install ... --constraint ...` pattern and tell the learner to use the current stable version and matching constraints file from the official Airflow install docs.
+
+Keep setup secondary to the learning flow.
+
+## What To Ignore For Now
 
 These topics matter later, but they are not needed for first exposure:
 
@@ -96,21 +92,19 @@ These topics matter later, but they are not needed for first exposure:
 - cross-team platform architecture
 - advanced scheduling edge cases
 
----
-
-## Good fast-mode notebook direction
+## Notebook Plan / Learning Flow
 
 Use one small CSV-processing workflow:
 
-1. load raw order data
-2. compute a tiny summary
-3. write a small output file
+1. show the DAG mental model with a tiny dependency sketch
+2. inspect the real DAG file that powers the example
+3. inspect the input CSV
+4. reproduce the data transformation in plain Python
+5. connect that walkthrough back to one practical project idea
 
 This works well because it makes the DAG, tasks, and dependencies obvious without needing a large codebase.
 
----
-
-## Support-file strategy
+## Support-File Strategy
 
 Airflow is not naturally notebook-native, so the notebook should stay readable even if the learner does not run Airflow immediately.
 
@@ -127,19 +121,9 @@ Use `mini_project/` to hold:
 - the tiny CSV input
 - a short run note
 
----
+No extra `assets/` folder is needed for this example.
 
-## Setup note
-
-Use `uv` by default for environment creation and installation.
-
-Airflow installation is version-sensitive, so the notebook should show the `uv pip install ... --constraint ...` pattern and tell the learner to use the current stable version and matching constraints file from the official Airflow install docs.
-
-Keep setup secondary to the learning flow.
-
----
-
-## What the learner should understand after the notebook
+## What The Learner Should Understand By The End
 
 After the first pass, the learner should be able to say:
 
@@ -149,3 +133,33 @@ After the first pass, the learner should be able to say:
 - I understand why Airflow is useful
 - I know what file to inspect first
 - I have one small project direction to try next
+
+## Project Ideas
+
+Main project idea:
+
+Build one small CSV-processing workflow with three tasks:
+
+1. load raw order data
+2. compute a tiny summary
+3. write a small output file
+
+Possible extension:
+
+Add one validation task before the summary step and inspect how the DAG structure changes.
+
+## Sources
+
+Official docs:
+
+- Airflow docs home: <https://airflow.apache.org/docs/>
+- Core concepts: <https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/index.html>
+- Airflow 101 tutorial: <https://airflow.apache.org/docs/apache-airflow/stable/tutorial/fundamentals.html>
+- TaskFlow tutorial: <https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html>
+
+Official repository docs and examples:
+
+- Apache Airflow repository: <https://github.com/apache/airflow>
+
+These are the main sources for this lab.
+Start with the TaskFlow tutorial and core concepts pages if you want the next layer of detail.
