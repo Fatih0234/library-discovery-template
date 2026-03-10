@@ -1,31 +1,26 @@
 ---
 name: github-repository-discovery
-description: "Use when a task is to discover GitHub repositories for a target Python library: identify the official repository, shortlist learner-friendly example or demo repos, decide what is worth reading or cloning into `examples/<library>/`, and point to the first files or folders to inspect. Do not use for generic web research, package installation help, or arbitrary repository analysis unrelated to Python library discovery."
+description: "Use when a task is to discover GitHub repositories for a target Python library: identify the official repository, shortlist learner-friendly example or demo repos, decide what is worth inspecting first, and only exceptionally recommend a local clone. Do not use for generic web research, package installation help, or arbitrary repository analysis unrelated to Python library discovery."
 ---
 
 # GitHub Repository Discovery
 
-## Purpose
+Use this skill for structured GitHub repository discovery inside this notebook-first template.
 
-Use this skill for structured GitHub repository discovery inside this notebook-first Python library exploration template.
+Treat the task as a bounded ranking and inspection problem:
 
-Treat the task as a bounded ranking and curation problem:
+- identify the canonical repository
+- shortlist a few useful example or demo repositories when they add learning value
+- decide what to inspect first
+- produce a short curated artifact instead of a noisy search dump
 
-- find the best few repositories for a learner
-- separate official sources from example or demo repositories
-- inspect before cloning
-- produce a short curated artifact, not a noisy result dump
+Its default report target is `examples/<library>/repo_discovery.md`, but only when repository discovery materially helps the library exploration.
 
-This skill is repo-specific. Its default report target is `examples/<library>/repo_discovery.md`.
+## Use this skill when
 
-## Triggering
-
-Use this skill when the task is to:
-
-- find the official repository for a Python library
-- discover GitHub example, demo, tutorial, or notebook repositories for that library
-- decide which repositories are worth cloning into `examples/<library>/`
-- identify which files or folders are worth reading first in shortlisted repositories
+- the task is to find the official repository for a Python library
+- the task is to discover learner-friendly GitHub example, demo, tutorial, or notebook repositories
+- the task is to decide what repository files or folders are worth reading first
 
 Do not use this skill for:
 
@@ -34,217 +29,159 @@ Do not use this skill for:
 - package installation help
 - arbitrary repository analysis unrelated to Python library discovery
 
-## Preconditions
-
-Before searching:
-
-1. Confirm the target library name and any common aliases.
-   Examples: package name vs repository name, like `apache-airflow` vs `airflow`.
-2. Check whether `gh` is installed.
-3. Check whether `gh auth status` succeeds.
-4. Decide whether public repositories are enough or whether authenticated access may matter.
-5. If the library name or search scope is unclear, ask one lightweight clarifying question before searching.
-
-Useful checks:
-
-```sh
-command -v gh
-gh auth status
-```
-
-If `gh` is missing or unauthenticated, public repository search can still work through the bundled script, but be conservative with request count because unauthenticated search is limited to 10 requests per minute.
-
 ## Bundled resources
 
 - `scripts/search_repositories.sh`
-  Small wrapper around `GET /search/repositories` using `gh api search/repositories` when authenticated.
+  Small wrapper around `GET /search/repositories`.
 - `references/github-search-notes.md`
-  Short summary of the GitHub REST search docs and constraints.
+  Exact GitHub Search API behavior, limits, sorting rules, and failure cases.
 - `assets/repo_discovery_template.md`
   Skeleton for `examples/<library>/repo_discovery.md`.
 
-Read the reference note only when you need the exact API behavior or limits.
+Read the reference note when you need exact API behavior.
+Keep this file focused on workflow and guardrails.
 
-## Search protocol
+## Working rules
+
+- Keep the query set small and deliberate.
+- Prefer better queries over more queries.
+- Separate canonical-repository discovery from learner/example discovery.
+- Do not default to `language:Python` when identifying the canonical repository.
+- Inspect metadata, README, and repository tree before making recommendations.
+- Default decision is inspect-only.
+- Clone only when local checkout is clearly justified, and do not treat local clones as part of the default template output.
+
+## Workflow
 
 ### 1. Normalize the library name
 
-Start with the Python package name, then note likely repository aliases.
+Start with the package name, then note likely repository aliases.
 
 Examples:
 
-- `tenacity`
 - `pydantic`
 - `duckdb`
 - `apache-airflow`
-
-Prefer search terms that match how the project is named on GitHub.
 
 ### 2. Check the environment
 
 Prefer GitHub CLI-based REST calls.
 
-Run:
-
 ```sh
 command -v gh
 gh auth status
 ```
 
-If authenticated, use authenticated requests. If not, use public search only and keep the number of search passes low.
+If authenticated access is unavailable, use public search conservatively and lean on narrower queries.
+For exact rate limits, query limits, `incomplete_results`, and `422` handling, read `references/github-search-notes.md`.
 
-### 3. Plan a small query set
+### 3. Phase 1: identify the canonical repository
 
-Do not rely on one giant query. Plan 4-6 focused passes, using only the queries that add signal for the target library.
+Start with broad passes that match how the project is named on GitHub.
 
-Candidate passes:
+Do not add `language:Python` by default here. A Python library may live in a mixed-language or non-Python-dominant repository.
 
-- `<library> language:Python`
-- `<library> in:name language:Python`
-- `<library> in:description language:Python`
-- `<library> example language:Python`
-- `<library> demo language:Python`
-- `<library> tutorial language:Python`
-- `<library> notebook language:Python`
-- `<library> archived:false language:Python`
+Good canonical passes:
 
-Query rules:
+- `<library>`
+- `<library> in:name`
+- `<library> archived:false`
+- `<alias>`
 
-- keep queries under GitHub's 256-character limit excluding operators and qualifiers
-- keep boolean operators to at most five total `AND`, `OR`, or `NOT`
-- prefer narrowing with qualifiers over long boolean-heavy queries
+Use default best-match ranking first.
 
-### 4. Execute repository search
-
-Use the bundled wrapper:
+Examples:
 
 ```sh
 SKILL_DIR=".agents/skills/github-repository-discovery"
 
-"$SKILL_DIR/scripts/search_repositories.sh" "tenacity language:Python" "" "" 20 1
-"$SKILL_DIR/scripts/search_repositories.sh" "pydantic example language:Python" stars desc 20 1
-"$SKILL_DIR/scripts/search_repositories.sh" "duckdb archived:false language:Python" updated desc 20 1
+"$SKILL_DIR/scripts/search_repositories.sh" "duckdb" "" "" 20 1
+"$SKILL_DIR/scripts/search_repositories.sh" "apache-airflow in:name archived:false" "" "" 20 1
+"$SKILL_DIR/scripts/search_repositories.sh" "pydantic" "" "" 20 1
 ```
 
-Behavior to follow:
+### 4. Phase 2: discover learner-friendly example repositories
 
-- use default best match when trying to identify the official or canonical repository
-- use `sort=stars&order=desc` for a popularity scan
-- use `sort=updated&order=desc` when freshness matters
-- default to `per_page=20` to `30` for inspection-heavy passes
-- use `per_page=100` only when there is a clear reason to broaden the scan
+Only after the canonical repository is clear, run targeted example passes.
 
-GitHub repository search returns up to 100 results per page and at most 1,000 results per search. Do not page deeply by default.
+This is where qualifiers such as these are appropriate:
 
-### 5. Handle API limits and failures explicitly
+- `language:Python`
+- `example`
+- `demo`
+- `tutorial`
+- `notebook`
+- `archived:false`
 
-Work within the documented constraints:
+Examples:
 
-- authenticated search: up to 30 requests per minute
-- unauthenticated search: up to 10 requests per minute
-- default ranking: best match unless `sort` is provided
-- internal search scope: GitHub only searches up to 4,000 matching repositories for a query
+```sh
+"$SKILL_DIR/scripts/search_repositories.sh" "duckdb example language:Python" stars desc 20 1
+"$SKILL_DIR/scripts/search_repositories.sh" "pydantic tutorial language:Python" stars desc 20 1
+"$SKILL_DIR/scripts/search_repositories.sh" "apache-airflow notebook language:Python" updated desc 20 1
+```
 
-When search goes wrong:
-
-- if a query is too broad or noisy, narrow it with `in:name`, `in:description`, `archived:false`, or a better keyword
-- if `incomplete_results=true`, narrow or split the query; do not blindly retry the same broad pass
-- if a `422` response appears, check query length, boolean operator count, access qualifiers like `repo:` or `org:`, or possible spam throttling before retrying
-- if you are nearing the rate limit, stop adding redundant passes
-
-Prefer better queries over more queries.
-
-### 6. Shortlist candidates by category
-
-Shortlist only the strongest candidates. Use categories such as:
-
-- official / canonical repository
-- learner-friendly examples
-- focused practical demos
-- notable but large / reference-only repositories
-
-### 7. Evaluate with a transparent rubric
+### 5. Evaluate candidates with the same rubric
 
 For each serious candidate, check:
 
-- likely officialness
+- officialness evidence
 - relevance to the target library
-- evidence that the library is used meaningfully, not just mentioned
-- usefulness for a learner
-- repository size and inspectability
-- presence of examples, docs, notebooks, or tests
-- maintenance signal and recency
-- title and description quality
+- learner value
+- maintenance or recency signal
+- size and inspectability
+- what to read first
 
-### 8. Inspect before cloning
+Shortlist only the strongest candidates.
+
+### 6. Inspect before clone
 
 Do not clone immediately.
 
-First inspect:
+Inspect first:
 
-- repository metadata
-- README
-- top-level file tree
-- obvious folders such as `examples/`, `docs/`, `notebooks/`, and `tests/`
+- repository metadata and README
+- top-level tree
+- obvious docs, examples, notebooks, or tests
 
 Useful commands:
 
 ```sh
 gh repo view OWNER/REPO
-gh api repos/OWNER/REPO/readme -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"
 gh api repos/OWNER/REPO/contents -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"
+gh api repos/OWNER/REPO/contents/PATH -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"
 ```
 
-Only recommend cloning once the repository is clearly useful for learning.
+### 7. Clone only when justified
 
-### 9. Clone selectively
+Clone only when local checkout will materially improve the learning lab and that value is not achievable through inspection alone.
 
-Default maximum:
+Rules:
 
-- 1 official repository if it is worth local inspection
-- 2-4 additional learner-friendly repositories
+- do not clone by default
+- avoid cloning large or noisy repositories for first-pass learning
+- do not treat clones as part of the default template output
+- do not commit cloned repositories as template artifacts
 
-Avoid cloning large or noisy repositories by default. Large canonical repositories can stay reference-only.
+### 8. Produce `repo_discovery.md`
 
-Example:
+Create `examples/<library>/repo_discovery.md` when repository discovery is part of the workflow.
 
-```sh
-gh repo clone OWNER/REPO examples/<library>/repos/<repo-name>
-```
-
-### 10. Produce a structured artifact
-
-Create `examples/<library>/repo_discovery.md` when repository discovery is part of a library exploration workflow.
-
-Start from `assets/repo_discovery_template.md` and fill in:
-
-- search goal
-- auth status
-- queries used
-- shortlisted repositories by category
-- why each repository was selected
-- what files or folders to read first
-- clone decisions
-- reference-only repositories
-- cautions and limitations encountered
-
-Keep the artifact curated and short. It should support later `notes.md` and notebook work, not replace them.
+Start from `assets/repo_discovery_template.md`.
+Keep the file short, curated, and useful for later `notes.md`.
+It should capture the shortlist, the evidence, what to inspect first, and why the final decision was inspect-only or clone.
 
 ## Boundaries
 
 This skill will not:
 
 - map the full ecosystem
-- build a multi-agent workflow
-- use MCP
 - bulk-clone repositories
 - hide the search method
-- claim a repository is high-quality without evidence from metadata, README, or tree inspection
+- claim a repository is high quality without evidence from metadata, README, or tree inspection
 
 ## References
 
-For exact API details, read:
-
 - `references/github-search-notes.md`
-- GitHub REST API docs: About search
-- GitHub REST API docs: Search repositories
+- [GitHub REST API: About search](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#about-search)
+- [GitHub REST API: Search repositories](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories)

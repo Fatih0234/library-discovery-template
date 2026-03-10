@@ -13,6 +13,7 @@ Read these files first, in this order:
 
 Then inspect the canonical example folder:
 
+- `examples/airflow/repo_discovery.md`
 - `examples/airflow/notes.md`
 - `examples/airflow/learning_lab.ipynb`
 - `examples/airflow/mini_project/README.md`
@@ -26,9 +27,10 @@ The default flow is:
 1. choose a Python library
 2. ask at most 3 lightweight framing questions when useful
 3. research the library from official docs and first-party examples
-4. reduce that research into a structured local `notes.md` with a short `Sources` section
-5. generate a notebook-first `learning_lab.ipynb` with a short `Sources and next reading` section
-6. optionally add a small `mini_project/` only if it helps the notebook land better
+4. if GitHub repository discovery materially helps, use the `github-repository-discovery` skill and create a short local `repo_discovery.md`
+5. reduce the research into a structured local `notes.md` with a short `Sources` section
+6. generate a notebook-first `learning_lab.ipynb` with a short `Sources and next reading` section
+7. optionally add a small `mini_project/` only if it helps the notebook land better
 
 When browsing is needed, prioritize:
 
@@ -40,6 +42,8 @@ When the task is specifically GitHub repository discovery for a target Python li
 
 Do not synthesize directly from scattered sources.
 Avoid unsupported or undocumented claims when practical.
+Keep repository discovery inspect-first by default.
+Only clone when local checkout is clearly justified, and do not treat clones as a default output artifact.
 Always reduce the research into a local curated `notes.md` before generating the final notebook.
 Make the main sources visible in both `notes.md` and the notebook without turning the output into citation machinery.
 

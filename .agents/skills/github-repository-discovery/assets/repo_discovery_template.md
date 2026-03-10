@@ -1,29 +1,34 @@
-# Repo Discovery
+# <Library> Repository Discovery
 
-## Search goal
+This file is a short support artifact for later `notes.md`.
+Keep it curated.
+Do not turn it into a search dump.
 
-## Library / aliases
+## Search Goal
 
-## Auth status
+## Library / Aliases
 
-## Queries used
+## Auth Status
 
-## Shortlisted repositories
+## Search Passes Used
 
-### Official / canonical repository
+- Canonical repository identification:
+- Learner/example repository discovery:
 
-### Learner-friendly examples
+## Shortlisted Repositories
 
-### Focused practical demos
+### OWNER/REPO
 
-### Notable but large / reference-only repositories
+- Category:
+- Officialness evidence:
+- Relevance to the library:
+- Learner value:
+- Maintenance / recency signal:
+- Size / inspectability signal:
+- Read first:
+- Decision: inspect-only or clone
+- Clone rationale: include only when the decision is clone
 
-## Why selected
+## Reference-Only Repositories
 
-## Read first
-
-## Clone decision
-
-## Reference-only repos
-
-## Cautions / limitations
+## Cautions / Limitations

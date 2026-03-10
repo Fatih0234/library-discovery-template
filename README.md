@@ -1,43 +1,32 @@
 # Notebook-First Python Library Exploration Template
 
-This repository is a small Codex-first template for learning a Python library through a guided Jupyter notebook.
+This repository is a small Codex-first template for turning Python library documentation into a guided Jupyter notebook.
 
-The repo is intentionally lean. It is not a generator framework, orchestration system, or generalized multi-language platform. It is a file-based workflow for turning official documentation and first-party examples into a beginner-friendly learning lab with explicit provenance.
+The repo is intentionally lean. It is a file-based workflow, not a generator framework or orchestration layer.
 
-## How to use it
+## Start here
 
-1. Read `AGENTS.md`, `PHILOSOPHY.md`, `SPEC.md`, `TEMPLATE.md`, and `TASKS.md`.
-2. Choose a Python library and default to `fast exploration` unless the learner clearly wants more depth.
-3. Ask at most 3 short framing questions only when they will materially improve the notebook.
-4. Research the library from official docs and first-party examples, prioritizing official docs first.
-5. Reduce that research into a structured `examples/<library>/notes.md` with a short `Sources` section.
-6. Generate `examples/<library>/learning_lab.ipynb` as the primary learning artifact, including a short `Sources and next reading` section.
-7. Add `examples/<library>/mini_project/` only when it makes the notebook easier to understand or extend.
+- Read `PHILOSOPHY.md` for the teaching mindset.
+- Read `SPEC.md` for the normative workflow and artifact contract.
+- Read `TEMPLATE.md` for the artifact blueprints.
+- Read `AGENTS.md` and `TASKS.md` for repo-local operating guidance.
 
 ## Default workflow
 
-`research -> notes.md -> learning_lab.ipynb -> optional mini_project/`
+`official docs -> optional repo_discovery.md -> notes.md -> learning_lab.ipynb -> optional mini_project/`
 
-- `notes.md` is the local source of truth for curated research and source provenance
-- `learning_lab.ipynb` is the learner-facing notebook, with a short provenance section
-- `mini_project/` is supporting material, not the main deliverable
+- `learning_lab.ipynb` is the primary deliverable.
+- `notes.md` is the curated research source of truth.
+- `repo_discovery.md` is an optional support artifact for repository selection and inspection when GitHub discovery materially helps.
+- `mini_project/` is optional support material, not the main product.
 
-## What good output looks like
-
-- one notebook that mixes explanation, runnable code, and small experiments
-- a clear mental model of why the library exists
-- one strong first project idea
-- practical setup guidance using `uv`
-- clear sources and next-reading pointers
-- a few next experiments and follow-up questions for the agent
-
-## Constraints
+## Operating constraints
 
 - Python libraries only
 - notebook-first, not markdown-first
-- official docs and first-party examples first
-- avoid undocumented claims when practical
+- official docs first, then official repository docs and examples
+- inspect-first for repository discovery; cloning is exceptional
 - practical over exhaustive
-- no heavy automation or extra framework layers
+- no heavy framework or orchestration layer
 
-See `examples/airflow/` for the canonical notebook-first example.
+See `examples/airflow/` for the canonical example set, including an optional `repo_discovery.md`.

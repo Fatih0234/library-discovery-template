@@ -4,6 +4,66 @@ Use the following blueprint for a generated notebook-first learning lab.
 
 ---
 
+# `repo_discovery.md` Blueprint
+
+Use this only when GitHub repository discovery materially helps.
+
+Keep it short.
+This is a support artifact for later `notes.md`, not a learner-facing docs dump.
+
+## Suggested sections
+
+### 1. Title
+
+Use:
+
+- `# <Library> Repository Discovery`
+
+### 2. `## Search Goal`
+
+State what discovery work needed to answer.
+
+### 3. `## Library / Aliases`
+
+Record the package name and important repository aliases.
+
+### 4. `## Auth Status`
+
+Record whether authenticated GitHub access was available and whether public search was enough.
+
+### 5. `## Search Passes Used`
+
+Separate:
+
+- canonical repository identification passes
+- learner/example repository passes
+
+### 6. `## Shortlisted Repositories`
+
+For each serious candidate, use one subsection such as:
+
+### `OWNER/REPO`
+
+- `Category:` official / canonical, learner-friendly example, focused demo, or reference-only
+- `Officialness evidence:`
+- `Relevance to the library:`
+- `Learner value:`
+- `Maintenance / recency signal:`
+- `Size / inspectability signal:`
+- `Read first:`
+- `Decision:` inspect-only or clone
+- `Clone rationale:` include only when the decision is clone
+
+### 7. `## Reference-Only Repositories`
+
+List any repositories worth remembering but not worth deeper inspection for this lab.
+
+### 8. `## Cautions / Limitations`
+
+Record broad-query noise, missing access, incomplete results, or why cloning was not needed.
+
+---
+
 # `notes.md` Blueprint
 
 Use the same structure in both modes.
@@ -50,7 +110,7 @@ Describe the teaching path the notebook should follow.
 
 ### 9. `## Support-File Strategy`
 
-Explain whether `mini_project/`, `data/`, or `assets/` are needed and why.
+Explain whether `repo_discovery.md`, `mini_project/`, `data/`, or `assets/` are needed and why.
 
 ### 10. `## What The Learner Should Understand By The End`
 

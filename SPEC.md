@@ -9,7 +9,7 @@ Notebook-First Python Library Exploration Template
 This project is a Codex-assisted starter template for turning Python library documentation into a small, guided learning notebook.
 
 The goal is not to build a platform or an automation stack.
-The goal is to produce one strong `.ipynb` learning lab that combines explanation, notes, runnable code, mini experiments, and a practical project direction.
+The goal is to produce one strong `.ipynb` learning lab that combines explanation, curated notes, runnable code, mini experiments, and a practical project direction.
 
 ---
 
@@ -20,9 +20,10 @@ The V1 workflow is file-based:
 1. choose a Python library
 2. optionally ask up to 3 short framing questions
 3. research official docs and first-party examples
-4. save curated structured research in `examples/<library>/notes.md`
-5. generate `examples/<library>/learning_lab.ipynb`
-6. optionally add `examples/<library>/mini_project/` only when it materially helps the notebook
+4. optionally perform GitHub repository discovery when it materially helps identify the canonical repository, learner-friendly examples, or what to inspect first
+5. save curated structured research in `examples/<library>/notes.md`
+6. generate `examples/<library>/learning_lab.ipynb`
+7. optionally add `examples/<library>/mini_project/` only when it materially helps the notebook
 
 The primary deliverable is `learning_lab.ipynb`.
 
@@ -43,6 +44,31 @@ Every exploration should:
 
 Keep provenance lightweight.
 A small explicit source section is enough.
+
+---
+
+## Repository discovery contract
+
+GitHub repository discovery is optional support work, not a required phase for every library.
+
+Use it only when GitHub repository selection materially helps with one or more of these:
+
+- identifying the official or canonical repository
+- shortlisting learner-friendly example or demo repositories
+- deciding which files or folders are worth reading first
+
+If repository discovery is used, save the output as:
+
+- `examples/<library>/repo_discovery.md`
+
+Rules:
+
+- keep `repo_discovery.md` short and curated
+- use it to support later `notes.md`, not to replace `notes.md`
+- default to inspection of metadata, README, and repository tree before any clone decision
+- treat cloning as exceptional, not default workflow
+- do not treat cloned repositories as part of the default template output
+- do not commit cloned repositories as template artifacts
 
 ---
 
@@ -128,6 +154,7 @@ Rules:
 - keep the same skeleton in both modes
 - keep fast exploration short and selective
 - expand depth inside the same sections for in-depth exploration
+- absorb only the useful conclusions from `repo_discovery.md` when that support artifact exists
 - justify any `mini_project/`, `data/`, or `assets/` in `Support-File Strategy`
 - keep the `Sources` section short and practical
 
@@ -177,6 +204,7 @@ The standard output shape is:
 
 ```text
 examples/<library>/
+├── repo_discovery.md      # optional
 ├── notes.md
 ├── learning_lab.ipynb
 └── mini_project/          # optional
@@ -184,6 +212,7 @@ examples/<library>/
 
 Possible support artifacts:
 
+- `repo_discovery.md` for short curated GitHub repository selection and inspection notes
 - `mini_project/` for a small concrete project
 - `data/` for tiny local datasets when they improve the notebook
 - `assets/` only when they materially help explanation
@@ -242,3 +271,5 @@ It should avoid:
 - full production setup
 
 Because Airflow is not naturally notebook-native, the example may use a small `mini_project/` to support the notebook while keeping the notebook itself readable without a full runtime.
+
+If `repo_discovery.md` is used for Airflow, it should identify `apache/airflow` as the canonical repository, point to a few high-signal docs or example paths, and keep an inspect-only default.
