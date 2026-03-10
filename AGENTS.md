@@ -36,6 +36,8 @@ When browsing is needed, prioritize:
 2. official repository docs and examples
 3. other high-quality first-party sources only when they clearly support the official docs
 
+When the task is specifically GitHub repository discovery for a target Python library, prefer the `github-repository-discovery` skill before deciding which repositories to inspect or clone.
+
 Do not synthesize directly from scattered sources.
 Avoid unsupported or undocumented claims when practical.
 Always reduce the research into a local curated `notes.md` before generating the final notebook.
