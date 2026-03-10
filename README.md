@@ -1,33 +1,41 @@
-# Library Lab Builder
+# Notebook-First Python Library Exploration Template
 
-Library Lab Builder is a small template for using Codex to understand a library before diving into it deeply.
+This repository is a small Codex-first template for learning a Python library through a guided Jupyter notebook.
 
-The repo is intentionally simple. It is not a platform, generator framework, or orchestration system. It is a file-based workflow for turning documentation into a small first-learning-lab.
+The repo is intentionally lean. It is not a generator framework, orchestration system, or generalized multi-language platform. It is a file-based workflow for turning official documentation into a beginner-friendly learning lab.
 
 ## How to use it
 
-1. Start with `AGENTS.md`, `PHILOSOPHY.md`, `SPEC.md`, `TEMPLATE.md`, and `TASKS.md`.
-2. Use Codex Plan Mode to research the library and save curated notes to `examples/<library>/docs.md`.
-3. Generate `examples/<library>/output.md` from those notes using the structure in `TEMPLATE.md`.
-4. Only consider `examples/<library>/lab.ipynb` if the library is clearly better learned through a notebook workflow.
+1. Read `AGENTS.md`, `PHILOSOPHY.md`, `SPEC.md`, `TEMPLATE.md`, and `TASKS.md`.
+2. Choose a Python library and default to `fast exploration` unless the learner clearly wants more depth.
+3. Ask at most 3 short framing questions only when they will materially improve the notebook.
+4. Research the library from official docs and first-party examples.
+5. Reduce that research into `examples/<library>/notes.md`.
+6. Generate `examples/<library>/learning_lab.ipynb` as the primary learning artifact.
+7. Add `examples/<library>/mini_project/` only when it makes the notebook easier to understand or extend.
 
-If the library is Python-related, use `uv` by default for environment creation and package handling.
+## Default workflow
 
-## File flow
+`research -> notes.md -> learning_lab.ipynb -> optional mini_project/`
 
-`research -> docs.md -> output.md`
+- `notes.md` is the local source of truth for curated research
+- `learning_lab.ipynb` is the learner-facing notebook
+- `mini_project/` is supporting material, not the main deliverable
 
-- `docs.md` is the local source of truth for the curated documentation notes
-- `output.md` is the learner-facing brief and lab outline
-- `lab.ipynb` is optional, not default
+## What good output looks like
 
-## What good V1 output looks like
+- one notebook that mixes explanation, runnable code, and small experiments
+- a clear mental model of why the library exists
+- one strong first project idea
+- practical setup guidance using `uv`
+- a few next experiments and follow-up questions for the agent
 
-- one strong first project
-- 3-5 concepts
-- minimal setup
-- clear files to inspect first
-- a short walkthrough
-- a few next questions to ask the agent
+## Constraints
 
-See `examples/airflow/` for the first test case.
+- Python libraries only
+- notebook-first, not markdown-first
+- official docs and first-party examples first
+- practical over exhaustive
+- no heavy automation or extra framework layers
+
+See `examples/airflow/` for the canonical notebook-first example.

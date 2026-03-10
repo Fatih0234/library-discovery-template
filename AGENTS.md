@@ -1,7 +1,6 @@
 # AGENTS.md
 
-This repository is a small, opinionated starter system for generating
-minimal learning labs from package or library documentation.
+This repository is a small, opinionated starter system for generating notebook-first learning labs for Python libraries.
 
 ## How to work in this repo
 
@@ -12,10 +11,11 @@ Read these files first, in this order:
 3. `TEMPLATE.md`
 4. `TASKS.md`
 
-Then inspect the example folder:
+Then inspect the canonical example folder:
 
-- `examples/airflow/docs.md`
-- `examples/airflow/output.md`
+- `examples/airflow/notes.md`
+- `examples/airflow/learning_lab.ipynb`
+- `examples/airflow/mini_project/README.md`
 
 ## Default V1 workflow
 
@@ -23,62 +23,65 @@ This repo is meant to be used with Codex as a small file-based template.
 
 The default flow is:
 
-1. research a library and collect the important beginner-level material
-2. reduce that research into a local `docs.md`
-3. generate a structured `output.md` from that local file
-4. optionally suggest a notebook only if the library is clearly easier to learn in that format
+1. choose a Python library
+2. ask at most 3 lightweight framing questions when useful
+3. research the library from official docs and first-party examples
+4. reduce that research into a local `notes.md`
+5. generate a notebook-first `learning_lab.ipynb`
+6. optionally add a small `mini_project/` only if it helps the notebook land better
 
 When browsing is needed, prefer official documentation and first-party examples.
 Do not synthesize directly from scattered sources.
-Always reduce the research into a local curated `docs.md` before generating the final learning lab.
+Always reduce the research into a local curated `notes.md` before generating the final notebook.
 
-If the library is Python-related, use `uv` as the default tool for virtual environments and package management.
+Use `uv` as the default tool for Python environments and package handling.
 
 ## Working rules
 
 - Keep the implementation minimal.
 - Do not over-engineer the system.
 - Do not add extra folders, tools, or frameworks unless they are clearly needed.
-- This is a V1 starter project, not a full platform.
-- Prefer a simple file-based workflow over complex orchestration.
-- The goal is clarity and usefulness, not completeness.
+- This is a V1 starter project, not a platform.
+- Prefer a simple file-based workflow over orchestration.
+- The notebook is the main teaching artifact.
 
-## What this system is trying to do
+## What this system is trying to produce
 
-Given a library's documentation, the system should help produce:
+Given a Python library's documentation, the system should help produce:
 
 1. a distilled explanation of the library
-2. one strong first project idea
-3. a minimal lab outline showing the key files and flow
-4. a short walkthrough showing the core usage
-5. a few follow-up questions or prompts the learner can explore next with the agent
+2. a practical mental model
+3. runnable notebook cells and mini experiments
+4. one strong first project idea
+5. a few follow-up questions or prompts the learner can explore next
 
 ## Important mindset
 
 The generated result should help a learner understand:
 
-- why the library exists
-- what problem it solves
+- what the library is for
+- why it exists
 - which concepts matter first
-- how the library is used in a simple but meaningful project
+- how to use it in code
+- what to try next
 
 ## Anti-goals
 
 Avoid these failure modes:
 
-- summarizing the entire documentation
-- dumping too many concepts at once
-- creating fake-complex "portfolio theater"
-- producing a project where the library usage is unclear
-- introducing unnecessary setup friction
+- dumping the whole documentation into notebook cells
+- turning the notebook into an API catalog
+- creating a fake-complex mini app that hides the library usage
+- asking too many framing questions
+- adding setup friction that overwhelms the first learning pass
 
 ## Output style
 
-The output should feel like:
+The output should feel:
 
 - focused
 - small
-- relevant
-- runnable in spirit, even when V1 stops at a clear lab outline
+- practical
+- readable even before every cell is run
 - beginner-friendly
 - concept-first

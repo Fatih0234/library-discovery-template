@@ -1,115 +1,117 @@
 # TEMPLATE.md
 
-Use the following structure for a generated library learning output.
+Use the following blueprint for a generated notebook-first learning lab.
 
 ---
 
-# {Library Name} — First Learning Lab
+# `learning_lab.ipynb` Blueprint
 
-## 1. What this library is for
+## Required sections
 
-Write a short explanation of the problem the library solves.
-Keep it practical and beginner-friendly.
-
-## 2. Core concepts to understand first
-
-List the 3–5 most important concepts a beginner should see first.
-
-Example format:
-
-- Concept 1
-- Concept 2
-- Concept 3
-- Concept 4
-
-## 3. What to ignore for now
-
-List advanced or distracting topics that are not needed for first exposure.
-
-Example format:
-
-- Advanced topic 1
-- Advanced topic 2
-- Advanced topic 3
-
-## 4. Recommended first project
-
-Give one project idea that best demonstrates the library.
+### 1. Markdown cell — Title and purpose
 
 Include:
-- project title
-- one-paragraph description
 
-## 5. Why this project is a good introduction
+- library name
+- learning mode (`fast exploration` or `in-depth exploration`)
+- what the learner should get from the notebook
 
-Explain why this project is a strong first project for learning the library.
+### 2. Markdown cell — What this library is for
 
-The explanation should mention:
-- relevance
-- simplicity
-- visibility of library usage
-- concept coverage
+Explain the problem the library solves in plain language.
 
-## 6. Minimal setup
+### 3. Markdown cell — Why it exists
 
-Provide only the setup needed to get started.
+Explain why someone would reach for it instead of a simpler default.
 
-Keep it short.
-Avoid optional extras.
+### 4. Markdown cell — Mental model
 
-If the project is Python-related, prefer `uv` for environment and package management.
+Describe the beginner model that makes the rest of the notebook easier to follow.
 
-## 7. Files to inspect first
+### 5. Markdown cell — Setup with `uv`
 
-List the key files in order, with one-line explanations.
+Keep setup short.
+Only include what the learner needs for the first pass.
 
-Example format:
+### 6. Code cell — First minimal example
 
-1. `file_a.py` — why this file matters
-2. `file_b.py` — why this file matters
-3. `README.md` — what to look for here
+Show the smallest useful example that makes the library feel real.
 
-## 8. Run instructions
+### 7. Markdown cell — Core concepts
 
-Give short, direct run steps.
+List the most important concepts a beginner should understand first.
 
-Example:
-- install dependencies
-- start the environment
-- run the project
-- inspect the output
+### 8. Markdown + code cells — Annotated examples
 
-## 9. Walkthrough
+Use a few short examples that:
 
-Explain the happy-path flow from start to finish in a few short paragraphs or bullets.
+- build on each other
+- explain the code clearly
+- keep the library usage visible
 
-## 10. Tiny exercises / next steps
+### 9. Markdown cell — Common patterns
 
-Give 2–3 small modifications the learner can try next.
+Show the patterns a beginner is most likely to see or use first.
 
-These should be simple extensions, not major new features.
+### 10. Markdown cell — Common mistakes or caveats
 
-## 11. Questions to ask next
+Call out what to ignore for now and what often confuses beginners.
 
-List 2–4 concrete follow-up questions or prompts the learner can explore with the agent.
+### 11. Markdown cell — Project idea(s)
 
-These should help the learner deepen understanding without expanding scope too fast.
+Include:
+
+- one main project idea in fast mode
+- one or more additional ideas only in in-depth mode when justified
+
+### 12. Markdown or code cell — Exercises / next experiments
+
+Give 2-4 small follow-up changes the learner can try next.
+
+### 13. Markdown cell — Suggested next questions for the agent
+
+List concrete follow-up prompts that deepen understanding without exploding scope.
+
+---
+
+## Mode guidance
+
+### Fast exploration
+
+Optimize for:
+
+- speed
+- clarity
+- one strong mental model
+- a few short code cells
+- one simple project idea
+
+### In-depth exploration
+
+Add:
+
+- more annotated examples
+- more caveats and tradeoffs
+- broader primitive coverage
+- multiple project directions when useful
+
+Do not turn this into a documentation dump.
 
 ---
 
 ## Output principles
 
-Every generated output should be:
+Every generated notebook should be:
 
 - concise
-- clear
 - practical
-- runnable
-- focused on one main use case
-- easy to continue exploring with an agent
+- progressive
+- beginner-friendly
+- readable before every cell is run
 
 Avoid:
-- long theory dumps
-- full documentation summaries
-- multiple project ideas
-- advanced topics too early
+
+- giant code blocks
+- disconnected snippets
+- raw documentation pasted into cells
+- advanced setup before the learner has a reason to care

@@ -2,84 +2,114 @@
 
 ## Core idea
 
-When learning a new package or library, most people do not need the full documentation first.
+When learning a Python library, most people do not need a full documentation summary first.
 
 What they usually need is:
 
-1. a fast explanation of why the library matters
-2. the few concepts that matter most at the beginning
-3. one project that makes the library feel useful and necessary
-4. a minimal environment that is easy to run and inspect
+1. a quick explanation of why the library matters
+2. the few concepts that unlock the first useful mental model
+3. short code they can inspect and run
+4. one project direction that makes the library feel worth learning
 
-This repository exists to help generate exactly that.
-
----
-
-## The learning philosophy
-
-This system is based on the idea of **first practical exposure**.
-
-That means the output should not try to teach everything.
-It should only teach the most important first 5–10% of the library,
-through one small but meaningful project.
-
-The learner should be able to say:
-
-- "Now I understand what this library is for."
-- "Now I see the core usage."
-- "Now I know when I might reach for it."
-- "Now I have a runnable example I can build on."
+This repository exists to help generate exactly that, with a notebook as the main learning surface.
 
 ---
 
-## What a good generated project looks like
+## The notebook-first philosophy
 
-A good first project should be:
+The notebook is the primary artifact because explanation and code belong together.
 
-- small enough to understand quickly
-- realistic enough to feel relevant
-- focused on one main use case
-- centered on the actual library usage
-- easy to run locally
-- easy to inspect file by file
+A good learning notebook lets the learner:
 
-It should not be fancy.
-It should be useful.
+- read the concept
+- inspect the code next to it
+- run a small experiment
+- connect that experiment to a project idea
+
+Markdown files still matter, but only as support material for research notes and small companion files.
 
 ---
 
-## What this system should avoid
+## Progressive understanding
 
-The system should avoid:
+This system should teach in layers:
 
-- feature overload
-- architecture sprawl
-- too many files
-- too many concepts
-- too much setup
-- too much explanation
-- examples that are so toy-like that they feel pointless
+1. what problem the library solves
+2. the beginner mental model
+3. one minimal example
+4. a few core patterns
+5. one practical next project
 
-The output should not feel like:
-"Here is everything the library can do."
+The output should not try to teach everything at once.
+It should help the learner understand the first useful 5-10% clearly.
 
-It should feel like:
-"Here is the first project that makes this library click."
+---
+
+## Practical over exhaustive
+
+The learning lab should surface the most useful concepts first.
+
+It should avoid:
+
+- full API tours
+- giant code blocks
+- unnecessary setup
+- advanced edge cases too early
+- examples that show breadth but teach very little
+
+The goal is learning signal, not coverage.
+
+---
+
+## Digestible code
+
+Code in the notebook should be:
+
+- short
+- runnable when practical
+- intentionally chosen
+- easy to explain
+
+The notebook should still work as a guided read-through even if the learner does not run every cell immediately.
+
+---
+
+## Project-based exposure
+
+Every exploration should point toward at least one practical project idea.
+
+The learner should leave with a sense of:
+
+- what the library is good for
+- what good code with it looks like
+- what small project would help it stick
+
+---
+
+## Adaptive depth
+
+The template supports two modes:
+
+- `fast exploration` for quick first exposure
+- `in-depth exploration` for a more serious lab
+
+Fast exploration is the default.
+In-depth exploration should go deeper only when the learner clearly wants it.
 
 ---
 
 ## Guiding principle
 
-Teach through one good project, not through a wall of explanation.
+Teach through a guided notebook, not through a wall of markdown.
 
 ---
 
-## The ideal outcome
+## Ideal outcome
 
-The learner opens the generated project and quickly understands:
+The learner opens the notebook and quickly understands:
 
-- the purpose of the library
-- the core mental model
-- the first important concepts
-- how those concepts appear in code
-- what to try next
+- why the library exists
+- how its core model works
+- what the important code looks like
+- what to ignore for now
+- what to build or try next
